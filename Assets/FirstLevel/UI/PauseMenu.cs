@@ -39,13 +39,18 @@ public class PauseMenu : MonoBehaviour
 
     public void OnPauseButtonClicked()
     {
-        if (GameIsPaused)
-        {
-            Resume();
-        }
-        else
+        if (!GameIsPaused)
         {
             Pause();
         }
     }
+
+    public void OnResumeButtonClicked()
+    {
+        if (GameIsPaused)
+        {
+            Resume();
+        }
+    }
+    
 }
