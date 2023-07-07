@@ -10,17 +10,17 @@ public class TeleportTrigger : MonoBehaviour
     public GameObject objectToFade; 
     public float fadeDuration = 1f;
 
-    public GameObject cameraObject; // Object of your camera
-    private CameraFollow cameraFollowScript; // Script "CameraFollow" attached to your camera
+    public GameObject cameraObject; 
+    private CameraFollow cameraFollowScript;
 
-    public GameObject playerObject; // Object of your player
-    private PlayerController playerControllerScript; // Script "PlayerController" attached to your player
+    public GameObject playerObject;
+    private PlayerController playerControllerScript;
 
-    public float newCameraMinX; // New MinX value for the camera
-    public float newCameraMaxX; // New MaxX value for the camera
+    public float newCameraMinX;
+    public float newCameraMaxX;
 
-    public float newPlayerMinX; // New MinX value for the player
-    public float newPlayerMaxX; // New MaxX value for the player
+    public float newPlayerMinX;
+    public float newPlayerMaxX;
 
     private bool playerInRange = false;
 
@@ -56,13 +56,21 @@ public class TeleportTrigger : MonoBehaviour
             promptText.text = ""; 
             StartCoroutine(FadeOutObject());
 
-            // Change the MinX and MaxX values of the camera
             cameraFollowScript.minX = newCameraMinX;
             cameraFollowScript.maxX = newCameraMaxX;
 
-            // Change the MinX and MaxX values of the player
             playerControllerScript.minX = newPlayerMinX;
             playerControllerScript.maxX = newPlayerMaxX;
+
+            Vector3 destinationDirection = teleportLocation - (Vector2)player.transform.position;
+            if (destinationDirection.x > 0 && !playerControllerScript.IsFacingRight())
+            {
+                playerControllerScript.ForceFlip();
+            }
+            else if (destinationDirection.x < 0 && playerControllerScript.IsFacingRight())
+            {
+                playerControllerScript.ForceFlip();
+            }
         }
     }
 

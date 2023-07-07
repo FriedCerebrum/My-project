@@ -1,3 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    public float speed = 5f;
+    public float minX = -10f;
+    public float maxX = 10f;
+    private Rigidbody2D rb;
+    private Animator anim;
+
+    // переменная, которая хранит, куда смотрит персонаж
+    private bool facingRight = true;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+    }
+
     void Update()
     {
         float move = Input.GetAxis("Horizontal");
@@ -7,10 +28,12 @@
         if (newX > maxX && move > 0)
         {
             newX = maxX;
+            move = 0; // остановка персонажа и анимации, если достигнута правая граница
         }
         else if (newX < minX && move < 0)
         {
             newX = minX;
+            move = 0; // остановка персонажа и анимации, если достигнута левая граница
         }
 
         // обновление позиции персонажа
@@ -36,3 +59,23 @@
             Flip();
         }
     }
+
+    // метод для переворота персонажа
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
+
+    public bool IsFacingRight()
+    {
+        return facingRight;
+    }
+
+    public void ForceFlip()
+    {
+        Flip();
+    }
+}
