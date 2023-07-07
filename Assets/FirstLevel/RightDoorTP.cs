@@ -4,20 +4,38 @@ using UnityEngine.UI;
 
 public class TeleportTrigger : MonoBehaviour
 {
-    public GameObject player; // Drag your player object into this slot in the inspector
-    public Vector2 teleportLocation; // Set the coordinates where the player will be teleported
-    public Text promptText; // Assign your Text object here to display the prompt
-    public GameObject objectToFade; // Object to fade after teleporting
-    public float fadeDuration = 1f; // Duration of the fading process
+    public GameObject player; 
+    public Vector2 teleportLocation;
+    public Text promptText; 
+    public GameObject objectToFade; 
+    public float fadeDuration = 1f;
+
+    public GameObject cameraObject; // Object of your camera
+    private CameraFollow cameraFollowScript; // Script "CameraFollow" attached to your camera
+
+    public GameObject playerObject; // Object of your player
+    private PlayerController playerControllerScript; // Script "PlayerController" attached to your player
+
+    public float newCameraMinX; // New MinX value for the camera
+    public float newCameraMaxX; // New MaxX value for the camera
+
+    public float newPlayerMinX; // New MinX value for the player
+    public float newPlayerMaxX; // New MaxX value for the player
 
     private bool playerInRange = false;
+
+    private void Start()
+    {
+        cameraFollowScript = cameraObject.GetComponent<CameraFollow>();
+        playerControllerScript = playerObject.GetComponent<PlayerController>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == player)
         {
             playerInRange = true;
-            promptText.text = "Нажмите 'T' для телепортации"; // Display prompt when player enters trigger
+            promptText.text = "Нажмите 'T' для телепортации";
         }
     }
 
@@ -26,7 +44,7 @@ public class TeleportTrigger : MonoBehaviour
         if (collision.gameObject == player)
         {
             playerInRange = false;
-            promptText.text = ""; // Remove prompt when player leaves trigger
+            promptText.text = "";
         }
     }
 
@@ -34,15 +52,22 @@ public class TeleportTrigger : MonoBehaviour
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.T))
         {
-            player.transform.position = teleportLocation; // Teleport player
-            promptText.text = ""; // Remove prompt after teleporting
-            StartCoroutine(FadeOutObject()); // Start the fading process
+            player.transform.position = teleportLocation; 
+            promptText.text = ""; 
+            StartCoroutine(FadeOutObject());
+
+            // Change the MinX and MaxX values of the camera
+            cameraFollowScript.minX = newCameraMinX;
+            cameraFollowScript.maxX = newCameraMaxX;
+
+            // Change the MinX and MaxX values of the player
+            playerControllerScript.minX = newPlayerMinX;
+            playerControllerScript.maxX = newPlayerMaxX;
         }
     }
 
     private IEnumerator FadeOutObject()
     {
-        // Make the object visible
         objectToFade.SetActive(true);
 
         SpriteRenderer spriteRenderer = objectToFade.GetComponent<SpriteRenderer>();
@@ -58,7 +83,6 @@ public class TeleportTrigger : MonoBehaviour
             yield return null;
         }
 
-        // Completely disable the object
         objectToFade.SetActive(false);
     }
 }
