@@ -168,13 +168,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0f5d46b1556824cbfca2570663b34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1263613408}
+  playerObject: {fileID: 1263613408}
   teleportLocation: {x: -60.5752, y: -5.58}
   promptText: {fileID: 1560820818}
   objectToFade: {fileID: 1209219710}
   fadeDuration: 5
   cameraObject: {fileID: 519420028}
-  playerObject: {fileID: 1263613408}
   newCameraMinX: -85
   newCameraMaxX: 85
   newPlayerMinX: -85
@@ -487,16 +486,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0f5d46b1556824cbfca2570663b34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1263613408}
-  teleportLocation: {x: 53.86546, y: -5.58}
+  playerObject: {fileID: 1263613408}
+  teleportLocation: {x: 45, y: -5.58}
   promptText: {fileID: 1560820818}
   objectToFade: {fileID: 1209219710}
   fadeDuration: 5
   cameraObject: {fileID: 519420028}
-  playerObject: {fileID: 1263613408}
-  newCameraMinX: -200
-  newCameraMaxX: 200
-  newPlayerMinX: 85
+  newCameraMinX: -85
+  newCameraMaxX: 85
+  newPlayerMinX: -85
   newPlayerMaxX: 85
 --- !u!61 &429269817
 BoxCollider2D:
@@ -988,13 +986,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0f5d46b1556824cbfca2570663b34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1263613408}
+  playerObject: {fileID: 1263613408}
   teleportLocation: {x: 87, y: 32.2}
   promptText: {fileID: 1560820818}
   objectToFade: {fileID: 1209219710}
   fadeDuration: 5
   cameraObject: {fileID: 519420028}
-  playerObject: {fileID: 1263613408}
   newCameraMinX: 15
   newCameraMaxX: 85
   newPlayerMinX: -8
@@ -1941,16 +1938,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0f5d46b1556824cbfca2570663b34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1263613408}
+  playerObject: {fileID: 1263613408}
   teleportLocation: {x: -7, y: 70}
   promptText: {fileID: 1560820818}
   objectToFade: {fileID: 1209219710}
   fadeDuration: 5
   cameraObject: {fileID: 519420028}
-  playerObject: {fileID: 1263613408}
-  newCameraMinX: -85
+  newCameraMinX: 0
   newCameraMaxX: 85
-  newPlayerMinX: -85
+  newPlayerMinX: -5
   newPlayerMaxX: 85
 --- !u!61 &2060791264
 BoxCollider2D:

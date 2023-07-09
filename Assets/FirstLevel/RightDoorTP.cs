@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class TeleportTrigger : MonoBehaviour
 {
-    public GameObject player; 
+    public GameObject playerObject; 
     public Vector2 teleportLocation;
     public Text promptText; 
     public GameObject objectToFade; 
@@ -13,7 +13,6 @@ public class TeleportTrigger : MonoBehaviour
     public GameObject cameraObject; 
     private CameraFollow cameraFollowScript;
 
-    public GameObject playerObject;
     private PlayerController playerControllerScript;
 
     public float newCameraMinX;
@@ -32,7 +31,7 @@ public class TeleportTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == player)
+        if (collision.gameObject == playerObject)
         {
             playerInRange = true;
             promptText.text = "Нажмите 'T' для телепортации";
@@ -41,7 +40,7 @@ public class TeleportTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject == player)
+        if (collision.gameObject == playerObject)
         {
             playerInRange = false;
             promptText.text = "";
@@ -52,7 +51,7 @@ public class TeleportTrigger : MonoBehaviour
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.T))
         {
-            player.transform.position = teleportLocation; 
+            playerObject.transform.position = teleportLocation; 
             promptText.text = ""; 
             StartCoroutine(FadeOutObject());
 
@@ -62,7 +61,7 @@ public class TeleportTrigger : MonoBehaviour
             playerControllerScript.minX = newPlayerMinX;
             playerControllerScript.maxX = newPlayerMaxX;
 
-            Vector3 destinationDirection = teleportLocation - (Vector2)player.transform.position;
+            Vector3 destinationDirection = teleportLocation - (Vector2)playerObject.transform.position;
             if (destinationDirection.x > 0 && !playerControllerScript.IsFacingRight())
             {
                 playerControllerScript.ForceFlip();
