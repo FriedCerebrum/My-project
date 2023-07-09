@@ -176,6 +176,7 @@ MonoBehaviour:
   cameraObject: {fileID: 519420028}
   newCameraMinX: -85
   newCameraMaxX: 85
+  newCameraYOffset: 0
   newPlayerMinX: -85
   newPlayerMaxX: 85
 --- !u!61 &10088882
@@ -746,6 +747,7 @@ MonoBehaviour:
   cameraObject: {fileID: 519420028}
   newCameraMinX: -85
   newCameraMaxX: 85
+  newCameraYOffset: 0
   newPlayerMinX: -85
   newPlayerMaxX: 85
 --- !u!61 &429269817
@@ -1040,6 +1042,7 @@ MonoBehaviour:
   smoothing: 2
   minX: -85
   maxX: 85
+  yOffset: 0
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1368,6 +1371,7 @@ MonoBehaviour:
   cameraObject: {fileID: 519420028}
   newCameraMinX: 75
   newCameraMaxX: 85
+  newCameraYOffset: 0
   newPlayerMinX: 53
   newPlayerMaxX: 60
 --- !u!61 &767807046
@@ -1513,6 +1517,7 @@ MonoBehaviour:
   cameraObject: {fileID: 519420028}
   newCameraMinX: 15
   newCameraMaxX: 85
+  newCameraYOffset: 0
   newPlayerMinX: -8
   newPlayerMaxX: 85
 --- !u!1 &864591263
@@ -1831,6 +1836,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 10088880}
+  - {fileID: 1383628025}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2242,6 +2248,90 @@ CapsuleCollider2D:
   m_Offset: {x: 1, y: -1}
   m_Size: {x: 5, y: 16.5}
   m_Direction: 0
+--- !u!1 &1383628024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1383628025}
+  - component: {fileID: 1383628026}
+  m_Layer: 3
+  m_Name: GhostGirl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1383628025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383628024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 19.92, y: -4.39, z: 0}
+  m_LocalScale: {x: 0.60518014, y: 0.60518014, z: 0.60518014}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 939215997}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1383628026
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383628024}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1902836061
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 66d9c2a5f664bb14e9216a56fdfd31b2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 19.2, y: 19.2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1391155557
 GameObject:
   m_ObjectHideFlags: 0
@@ -2380,6 +2470,7 @@ MonoBehaviour:
   cameraObject: {fileID: 519420028}
   newCameraMinX: -85
   newCameraMaxX: 85
+  newCameraYOffset: 0
   newPlayerMinX: -87
   newPlayerMaxX: 89
 --- !u!61 &1434489079
@@ -2553,15 +2644,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObject: {fileID: 1263613408}
-  teleportLocation: {x: 140, y: -78}
+  teleportLocation: {x: 143.8, y: -80}
   promptText: {fileID: 1560820818}
   objectToFade: {fileID: 1209219710}
   fadeDuration: 1
   cameraObject: {fileID: 519420028}
-  newCameraMinX: 120
-  newCameraMaxX: 140
-  newPlayerMinX: 135
-  newPlayerMaxX: 160
+  newCameraMinX: 143.5124
+  newCameraMaxX: 160
+  newCameraYOffset: -2.5
+  newPlayerMinX: 142.4
+  newPlayerMaxX: 187
 --- !u!61 &1743676210
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2660,6 +2752,7 @@ MonoBehaviour:
   cameraObject: {fileID: 519420028}
   newCameraMinX: -85
   newCameraMaxX: -73
+  newCameraYOffset: 0
   newPlayerMinX: -105
   newPlayerMaxX: -60
 --- !u!61 &1918987598
@@ -2850,8 +2943,9 @@ MonoBehaviour:
   cameraObject: {fileID: 519420028}
   newCameraMinX: 0
   newCameraMaxX: 85
+  newCameraYOffset: 0
   newPlayerMinX: -5
-  newPlayerMaxX: 85
+  newPlayerMaxX: 69
 --- !u!61 &2060791264
 BoxCollider2D:
   m_ObjectHideFlags: 0

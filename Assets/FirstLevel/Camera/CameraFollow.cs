@@ -8,6 +8,7 @@ public class CameraFollow : MonoBehaviour
     public float smoothing = 5f; // Скорость сглаживания
     public float minX;
     public float maxX;
+    public float yOffset; // Офсет по оси Y
 
     Vector3 offset; // Смещение между камерой и персонажем
 
@@ -21,6 +22,9 @@ public class CameraFollow : MonoBehaviour
     {
         // Вычисляем новую позицию камеры
         Vector3 targetCamPos = target.position + offset;
+
+        // Применяем смещение по оси Y
+        targetCamPos.y += yOffset;
         
         // Ограничиваем новую позицию в пределах minX и maxX
         targetCamPos.x = Mathf.Clamp(targetCamPos.x, minX, maxX);

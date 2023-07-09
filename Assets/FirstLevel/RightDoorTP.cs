@@ -17,6 +17,7 @@ public class TeleportTrigger : MonoBehaviour
 
     public float newCameraMinX;
     public float newCameraMaxX;
+    public float newCameraYOffset;
 
     public float newPlayerMinX;
     public float newPlayerMaxX;
@@ -57,6 +58,8 @@ public class TeleportTrigger : MonoBehaviour
 
             cameraFollowScript.minX = newCameraMinX;
             cameraFollowScript.maxX = newCameraMaxX;
+
+            cameraFollowScript.yOffset = newCameraYOffset; // обновляем офсет камеры по y. Такие костыли не видели даже в Китае.
 
             playerControllerScript.minX = newPlayerMinX;
             playerControllerScript.maxX = newPlayerMaxX;
