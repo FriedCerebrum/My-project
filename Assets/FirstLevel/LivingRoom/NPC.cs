@@ -1,16 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class NPC : MonoBehaviour
 {
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
+    public GameObject dialogueHint; // Подсказка для диалога
     public string[] dialogue;
     private int index = 0;
-    
     public GameObject contButton;
     public float wordSpeed;
     public bool playerIsClose;
@@ -19,9 +17,9 @@ public class NPC : MonoBehaviour
     void Start()
     {
         dialogueText.text = "";
+        dialogueHint.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && playerIsClose)
@@ -39,7 +37,7 @@ public class NPC : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Q) && dialoguePanel.activeInHierarchy)
         {
-            RemoveText();
+            StopDialogue();
         }
         if(dialogueText.text == dialogue[index])
         {
@@ -47,11 +45,20 @@ public class NPC : MonoBehaviour
         }
     }
 
+    public void StopDialogue()
+    {
+        dialogueText.text = ""; // Очистка текста при прерывании диалога
+        dialoguePanel.SetActive(false);
+        StopAllCoroutines(); // Останавливаем текущую корутину, чтобы предотвратить дублирование текста
+    }
+
     public void RemoveText()
     {
         dialogueText.text = "";
         index = 0;
         dialoguePanel.SetActive(false);
+        contButton.SetActive(false);
+        dialogueHint.SetActive(false);
     }
 
     IEnumerator Typing()
@@ -84,6 +91,7 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsClose = true;
+            dialogueHint.SetActive(true); // Показать подсказку для диалога
         }
     }
 
@@ -92,7 +100,8 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsClose = false;
-            RemoveText();
+            dialogueHint.SetActive(false); // Скрыть подсказку для диалога
+            StopDialogue();
         }
     }
 }
