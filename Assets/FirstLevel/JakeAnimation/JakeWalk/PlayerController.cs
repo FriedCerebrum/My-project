@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float maxX = 10f;
     private Rigidbody2D rb;
     private Animator anim;
+    public bool canMove = true;
+
 
     // переменная, которая хранит, куда смотрит персонаж
     private bool facingRight = true;
@@ -17,10 +19,16 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        
+
     }
 
     void Update()
     {
+        if (!canMove)
+        {
+            return;
+        }
         float move = Input.GetAxis("Horizontal");
         float newX = transform.position.x + move * speed * Time.deltaTime; // вычисление новой позиции по x
 
