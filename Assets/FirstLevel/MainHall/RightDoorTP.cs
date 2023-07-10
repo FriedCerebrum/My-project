@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro; // Импортируем пространство имен TextMeshPro
 
 public class TeleportTrigger : MonoBehaviour
 {
     public GameObject playerObject; 
     public Vector2 teleportLocation;
-    public Text promptText; 
+    public TextMeshProUGUI promptText; // Изменяем класс с Text на TextMeshProUGUI
+    public string hintText = "Нажмите 'T' для телепортации"; // Добавляем строку для настройки текста подсказки
     public GameObject objectToFade; 
     public float fadeDuration = 1f;
 
@@ -35,7 +36,7 @@ public class TeleportTrigger : MonoBehaviour
         if (collision.gameObject == playerObject)
         {
             playerInRange = true;
-            promptText.text = "Нажмите 'T' для телепортации";
+            promptText.text = hintText; // Используем настраиваемый текст подсказки
         }
     }
 
@@ -59,7 +60,7 @@ public class TeleportTrigger : MonoBehaviour
             cameraFollowScript.minX = newCameraMinX;
             cameraFollowScript.maxX = newCameraMaxX;
 
-            cameraFollowScript.yOffset = newCameraYOffset; // обновляем офсет камеры по y. Такие костыли не видели даже в Китае.
+            cameraFollowScript.yOffset = newCameraYOffset;
 
             playerControllerScript.minX = newPlayerMinX;
             playerControllerScript.maxX = newPlayerMaxX;

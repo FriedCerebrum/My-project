@@ -1,45 +1,73 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+
+[Serializable]
+public class Dialogue
+{
+    public List<string> lines = new List<string>();
+}
 
 public class NPC : MonoBehaviour
 {
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
-    public GameObject dialogueHint; // Подсказка для диалога
-    public string[] dialogue;
+    public GameObject dialogueHint;
+    public List<Dialogue> dialogues;
+    private List<string> currentDialogue;
     private int index = 0;
     public GameObject contButton;
     public float wordSpeed;
     public bool playerIsClose;
-
+    private Coroutine typingCoroutine;
+    private GameObject player; // Объект игрока
+    public float dialogueRange = 5.0f; // Расстояние для взаимодействия с диалогом
 
     void Start()
     {
         dialogueText.text = "";
         dialogueHint.SetActive(false);
+        currentDialogue = dialogues[0].lines;
+        player = GameObject.FindWithTag("Player"); // Получение объекта игрока
     }
 
     void Update()
     {
+        // Проверка расстояния между NPC и игроком
+        float distance = Vector2.Distance(transform.position, player.transform.position);
+        
+        if (distance > dialogueRange)
+        {
+            playerIsClose = false;
+            StopDialogue();
+        }
+        else
+        {
+            playerIsClose = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.E) && playerIsClose)
         {
             if (!dialoguePanel.activeInHierarchy)
             {
                 dialoguePanel.SetActive(true);
-                StartCoroutine(Typing());
+                dialogueHint.SetActive(false);
+                typingCoroutine = StartCoroutine(Typing());
             }
-            else if (dialogueText.text == dialogue[index])
+            else if (dialogueText.text == currentDialogue[index])
             {
                 NextLine();
             }
-
         }
+
         if (Input.GetKeyDown(KeyCode.Q) && dialoguePanel.activeInHierarchy)
         {
             StopDialogue();
         }
-        if(dialogueText.text == dialogue[index])
+
+        if(dialogueText.text == currentDialogue[index])
         {
             contButton.SetActive(true);
         }
@@ -47,9 +75,13 @@ public class NPC : MonoBehaviour
 
     public void StopDialogue()
     {
-        dialogueText.text = ""; // Очистка текста при прерывании диалога
+        dialogueText.text = "";
         dialoguePanel.SetActive(false);
-        StopAllCoroutines(); // Останавливаем текущую корутину, чтобы предотвратить дублирование текста
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
     }
 
     public void RemoveText()
@@ -63,7 +95,7 @@ public class NPC : MonoBehaviour
 
     IEnumerator Typing()
     {
-        foreach (char letter in dialogue[index].ToCharArray())
+        foreach (char letter in currentDialogue[index].ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
@@ -74,11 +106,15 @@ public class NPC : MonoBehaviour
     {
         contButton.SetActive(false);
 
-        if (index < dialogue.Length - 1)
+        if (index < currentDialogue.Count - 1)
         {
             index++;
             dialogueText.text = "";
-            StartCoroutine(Typing());
+            if (typingCoroutine != null)
+            {
+                StopCoroutine(typingCoroutine);
+            }
+            typingCoroutine = StartCoroutine(Typing());
         }
         else
         {
@@ -90,8 +126,7 @@ public class NPC : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerIsClose = true;
-            dialogueHint.SetActive(true); // Показать подсказку для диалога
+            dialogueHint.SetActive(true);
         }
     }
 
@@ -99,9 +134,20 @@ public class NPC : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerIsClose = false;
-            dialogueHint.SetActive(false); // Скрыть подсказку для диалога
-            StopDialogue();
+            dialogueHint.SetActive(false);
         }
     }
+    public void SetDialogue(int dialogueIndex)
+{
+    if (dialogueIndex >= 0 && dialogueIndex < dialogues.Count)
+    {
+        currentDialogue = dialogues[dialogueIndex].lines;
+        index = 0;
+    }
+    else
+    {
+        Debug.LogError("Invalid dialogue index");
+    }
+}
+
 }
