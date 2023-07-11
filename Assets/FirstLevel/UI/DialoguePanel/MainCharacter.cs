@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 [Serializable]
 public class MonologueTrigger
@@ -13,12 +14,14 @@ public class MonologueTrigger
 
 public class MainCharacter : MonoBehaviour
 {
+    public static MainCharacter currentMonologueCharacter;
+
     public GameObject monologuePanel;
     public TextMeshProUGUI monologueText;
     public GameObject monologueHint;
     public List<MonologueTrigger> monologueTriggers;
     private string currentMonologue;
-    public GameObject contButton;
+    public Button contButton; // changed from GameObject to Button
     public float wordSpeed;
     private Coroutine typingCoroutine;
     private Coroutine inputCoroutine;
@@ -28,18 +31,26 @@ public class MainCharacter : MonoBehaviour
 
     void Start()
     {
+        contButton.onClick.AddListener(NextMonologue);
+        contButton.interactable = false;  // button is initially disabled
+
         monologueText.text = "";
         monologueHint.SetActive(false);
         monologueQueue = new Queue<MonologueTrigger>(monologueTriggers);
         playerController = FindObjectOfType<PlayerController>();
-        if (playerController != null)
-        {
-            playerController.canMove = false; // Запретить игроку движение при старте
-        }
     }
 
     void Update()
     {
+        if (this == currentMonologueCharacter)
+        {
+            contButton.interactable = true;
+        }
+        else
+        {
+            contButton.interactable = false;
+        }
+
         if (inTriggerZone && !monologuePanel.activeInHierarchy && monologueQueue.Count > 0)
         {
             currentMonologue = monologueQueue.Dequeue().monologueText;
@@ -47,11 +58,12 @@ public class MainCharacter : MonoBehaviour
             monologueHint.SetActive(false);
             typingCoroutine = StartCoroutine(Typing());
             inputCoroutine = StartCoroutine(CheckForInput());
+            currentMonologueCharacter = this; // set current active monologue character
         }
 
         if (monologueText.text == currentMonologue)
         {
-            contButton.SetActive(true);
+            contButton.interactable = true;
         }
     }
 
@@ -76,7 +88,7 @@ public class MainCharacter : MonoBehaviour
     {
         monologueText.text = "";
         monologuePanel.SetActive(false);
-        contButton.SetActive(false);
+        contButton.interactable = false;
         monologueHint.SetActive(false);
         monologueQueue = new Queue<MonologueTrigger>(monologueTriggers);
     }
@@ -109,7 +121,7 @@ public class MainCharacter : MonoBehaviour
     {
         monologueText.text = "";
         monologuePanel.SetActive(false);
-        contButton.SetActive(false);
+        contButton.interactable = false;
         monologueHint.SetActive(false);
 
         if (playerController != null)
@@ -123,21 +135,24 @@ public class MainCharacter : MonoBehaviour
 
     public void NextMonologue()
     {
-        contButton.SetActive(false);
+        if (this == currentMonologueCharacter) // check if this instance is the current active monologue character
+        {
+            contButton.interactable = false;
 
-        if (monologueQueue.Count > 0)
-        {
-            currentMonologue = monologueQueue.Dequeue().monologueText;
-            monologueText.text = "";
-            if (typingCoroutine != null)
+            if (monologueQueue.Count > 0)
             {
-                StopCoroutine(typingCoroutine);
+                currentMonologue = monologueQueue.Dequeue().monologueText;
+                monologueText.text = "";
+                if (typingCoroutine != null)
+                {
+                    StopCoroutine(typingCoroutine);
+                }
+                typingCoroutine = StartCoroutine(Typing());
             }
-            typingCoroutine = StartCoroutine(Typing());
-        }
-        else
-        {
-            CloseMonologueWindow();
+            else
+            {
+                CloseMonologueWindow();
+            }
         }
     }
 
@@ -147,6 +162,10 @@ public class MainCharacter : MonoBehaviour
         {
             inTriggerZone = true;
             monologueHint.SetActive(true);
+            if (playerController != null)
+            {
+                playerController.canMove = false;
+            }
         }
     }
 
@@ -156,6 +175,10 @@ public class MainCharacter : MonoBehaviour
         {
             inTriggerZone = false;
             monologueHint.SetActive(false);
+            if (playerController != null)
+            {
+                playerController.canMove = true;
+            }
         }
     }
 }
