@@ -6,22 +6,25 @@ public class Diary : MonoBehaviour
     public GameObject[] pages; // Заполняется в редакторе Unity
     private List<int> unlockedPages = new List<int>();
     private int currentPage;
+    private bool isDiaryOpen;
 
     private void Start() 
     {
-        // Сначала делаем все страницы невидимыми
-        foreach (GameObject page in pages) 
+    // Сначала делаем все страницы и сам дневник невидимыми
+    foreach (GameObject page in pages) 
         {
             page.SetActive(false);
         }
+    gameObject.SetActive(false);
 
-        // "Разблокируем" и открываем первую страницу
-        if (pages.Length > 0) 
+    // "Разблокируем" первую страницу
+    if (pages.Length > 0) 
         {
             UnlockPage(0);
-            OpenPage(0);
         }
+    isDiaryOpen = false; // Предполагается, что дневник закрыт при старте
     }
+
 
     public void UnlockPage(int pageNumber) 
     {
@@ -80,6 +83,25 @@ public class Diary : MonoBehaviour
         if (unlockedPages.Count > 0) 
         {
             OpenPage(unlockedPages[unlockedPages.Count - 1]);
+        }
+        isDiaryOpen = true;
+    }
+
+    public void CloseDiary() 
+    {
+        gameObject.SetActive(false);
+        isDiaryOpen = false;
+    }
+
+    public void ToggleDiary()
+    {
+        if (isDiaryOpen)
+        {
+            CloseDiary();
+        }
+        else
+        {
+            OpenDiary();
         }
     }
 }
