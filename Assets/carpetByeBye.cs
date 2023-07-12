@@ -1,47 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-public class InteractionScript : MonoBehaviour
+public class InteractWithCarpet : MonoBehaviour
 {
-    public GameObject carpet;
-    public TextMeshProUGUI interactionText;
+    private GameObject carpet;
+    private GameObject teleport;
 
-    private bool isPlayerInTrigger = false;
-    private MonoBehaviour TeleportTrigger;
-
-    void Awake()
+    void Start()
     {
-        TeleportTrigger = GetComponent<MonoBehaviour>(); // Замените MonoBehaviour на тип вашего Teleport Trigger, если он не является MonoBehaviour.
-        TeleportTrigger.enabled = false; // Предполагается, что Teleport Trigger отключен изначально.
+        // Получение ссылки на дочерние объекты "Carpet" и "Teleport"
+        carpet = transform.Find("Carpet").gameObject;
+        teleport = transform.Find("Teleport").gameObject;
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player")) // Предполагаем, что у игрока есть тег "Player"
+        // Проверка, что игрок в зоне действия BoxCollider2D и нажал "E"
+        if (other.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.E))
         {
-            isPlayerInTrigger = true;
-            interactionText.text = "press E for fuck the carpet";
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            isPlayerInTrigger = false;
-            interactionText.text = "";
-        }
-    }
-
-    void Update()
-    {
-        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.E))
-        {
+            // Отключение объекта "Carpet" и включение объекта "Teleport"
             carpet.SetActive(false);
-            TeleportTrigger.enabled = true;
-            this.enabled = false; // отключить этот скрипт
+            teleport.SetActive(true);
+
+            // Отключение данного скрипта, чтобы не позволить повторно использовать функцию
+            this.enabled = false;
         }
     }
 }

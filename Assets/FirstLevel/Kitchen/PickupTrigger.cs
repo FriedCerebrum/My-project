@@ -14,7 +14,7 @@ public class PickUpShovel : MonoBehaviour
         if (other.gameObject.CompareTag("Player")) // Если игрок вошёл в триггер
         {
             canPickUp = true;
-            instructionText.text = "Press 'E' to raise the crowbar."; // Изменение текста
+            instructionText.text = "Press 'E' to raise the item."; // Изменение текста
         }
     }
 
