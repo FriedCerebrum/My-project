@@ -1116,9 +1116,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1383628027}
-        m_TargetAssemblyTypeName: NPC, Assembly-CSharp
-        m_MethodName: NextLine
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MainCharacter, Assembly-CSharp
+        m_MethodName: NextMonologue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1578,6 +1578,7 @@ GameObject:
   - component: {fileID: 519420036}
   - component: {fileID: 519420038}
   - component: {fileID: 519420037}
+  - component: {fileID: 519420039}
   m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1837,6 +1838,21 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &519420039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a28793f9ffe8342a468f1c49c833a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monologuePanel: {fileID: 1019815306}
+  monologueText: {fileID: 231181770}
+  contButton: {fileID: 1476834962}
 --- !u!1 &596067698
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,7 +2105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 695308930}
   - component: {fileID: 695308932}
-  - component: {fileID: 695308931}
+  - component: {fileID: 695308933}
   m_Layer: 0
   m_Name: MonologueTrigger
   m_TagString: Untagged
@@ -2112,27 +2128,6 @@ Transform:
   m_Father: {fileID: 2121370490}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &695308931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 695308929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e823d8053cbcda84b9a4cb3ffd22727d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monologuePanel: {fileID: 1019815306}
-  monologueText: {fileID: 231181770}
-  monologueHint: {fileID: 1317768710}
-  monologueTriggers:
-  - monologueText: Why am I not surprised that I found a crowbar so quickly? Apparently,
-      those planks won't be a big problem.
-  - monologueText: Let's look
-  contButton: {fileID: 1476834962}
-  wordSpeed: 0.06
 --- !u!61 &695308932
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2178,6 +2173,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &695308933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695308929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5384267c72dc8ae4089dff6c292549e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monologueManager: {fileID: 519420039}
+  monologueText: Ironically, the tool to access the far-left door was found just
+    around the corner.
 --- !u!1 &767807043
 GameObject:
   m_ObjectHideFlags: 0
@@ -3163,7 +3173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1083475429}
   - component: {fileID: 1083475431}
-  - component: {fileID: 1083475430}
+  - component: {fileID: 1083475432}
   m_Layer: 3
   m_Name: MonologueTrigger
   m_TagString: Untagged
@@ -3186,27 +3196,6 @@ Transform:
   m_Father: {fileID: 864591265}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1083475430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1083475428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e823d8053cbcda84b9a4cb3ffd22727d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monologuePanel: {fileID: 1019815306}
-  monologueText: {fileID: 231181770}
-  monologueHint: {fileID: 1317768710}
-  monologueTriggers:
-  - monologueText: This place looks more vibrant than I expected, but I shouldn't
-      deceive myself.
-  - monologueText: It is important to be cautious, as I'm not sure what awaits me.
-  contButton: {fileID: 1476834962}
-  wordSpeed: 0.06
 --- !u!61 &1083475431
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3252,6 +3241,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1083475432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083475428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5384267c72dc8ae4089dff6c292549e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monologueManager: {fileID: 519420039}
+  monologueText: This place looks more vibrant than I expected, but I shouldn't deceive
+    myself. It is important to be cautious, as I'm not sure what awaits me.
 --- !u!1 &1098345573
 GameObject:
   m_ObjectHideFlags: 0
@@ -5313,17 +5317,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1898254597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e823d8053cbcda84b9a4cb3ffd22727d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5384267c72dc8ae4089dff6c292549e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monologuePanel: {fileID: 1019815306}
-  monologueText: {fileID: 231181770}
-  monologueHint: {fileID: 1317768710}
-  monologueTriggers:
-  - monologueText: This carpet looks quite strange. Maybe it's worth trying to move
-      it? Who knows, there might be something underneath it?
-  contButton: {fileID: 1476834962}
-  wordSpeed: 0.06
+  monologueManager: {fileID: 519420039}
+  monologueText: This carpet looks quite suspicious. Maybe it's worth moving it?
+    Who knows what it's hiding underneath.
 --- !u!1 &1911701985
 GameObject:
   m_ObjectHideFlags: 0
