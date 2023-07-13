@@ -3011,6 +3011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 09b230a9a7bd995409421f1470f1bc74, type: 3}
+  volume: 0.2
 --- !u!1 &767807043
 GameObject:
   m_ObjectHideFlags: 0
@@ -4375,6 +4376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 6393ac32d1836f24ab7e718256209b8b, type: 3}
+  volume: 0.2
 --- !u!1 &1091106689
 GameObject:
   m_ObjectHideFlags: 0
@@ -4880,6 +4882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 6c1409b3463197741a0f4327ce464a9b, type: 3}
+  volume: 0.2
 --- !u!1 &1209219710
 GameObject:
   m_ObjectHideFlags: 0
@@ -5997,8 +6000,8 @@ MonoBehaviour:
     - 'Crying girl: (gratefully) Thank you, Jake. Your words fill me with hope. Hurry,
       time is dragging, and the curse of the castle is growing stronger.'
   - lines:
-    - You just bringed me the horizon
-    - kinda like this, yea
+    - 'Crying girl: Thank you, you gave me something I couldn''t expect for yea'
+    - 'Jake: Well, I guess you''re welcome?'
   contButton: {fileID: 410750696}
   wordSpeed: 0.12
   playerIsClose: 1
@@ -8080,6 +8083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 6f15d05b1ab127e46bc5cf89a37f9dd8, type: 3}
+  volume: 0.2
 --- !u!1 &1911701985
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using UnityEngine;
 public class AudioTrigger : MonoBehaviour
 {
     public AudioClip audioClip;  // Аудиофайл, который будет воспроизводиться
+    public float volume = 1f;  // Громкость звука (от 0 до 1)
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -15,6 +16,9 @@ public class AudioTrigger : MonoBehaviour
 
             // Устанавливаем аудиофайл для AudioSource
             audioSource.clip = audioClip;
+
+            // Устанавливаем громкость звука
+            audioSource.volume = volume;
 
             // Воспроизводим аудиофайл
             audioSource.Play();
